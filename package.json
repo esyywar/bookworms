@@ -1,0 +1,22 @@
+{
+  "name": "bookworms",
+  "version": "1.0.0",
+  "description": "Social network for bookworms",
+  "main": "server.js.js",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server"
+  },
+  "keywords": [],
+  "author": "Rahul Eswar",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^5.2.0",
+    "config": "^3.3.1",
+    "express": "^4.17.1",
+    "express-validator": "^6.5.0",
+    "nodemon": "^2.0.4"
+  }
+}
