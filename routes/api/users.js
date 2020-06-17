@@ -1,8 +1,12 @@
 const express = require('express')
 const router = express.Router()
+const gravatar = require('gravatar')
+const bcrypt = require('bcryptjs')
 
 /* Using express validator to check posted user registration info */
 const { check, validationResult } = require('express-validator')
+
+const User = require('../../models/User')
 
 /*
  *   @route      GET /api/users
@@ -16,7 +20,7 @@ router.post(
 		check('email', 'Please include a valid email').isEmail(),
 		check('password', 'Please enter password with at least 6 characters').isLength({ min: 6 }),
 	],
-	(req, res) => {
+	async (req, res) => {
 		const errors = validationResult(req)
 
 		/* If errors in validation, throw response */
@@ -27,8 +31,29 @@ router.post(
 		/* Registering user ... */
 		const { name, email, password } = req.body
 
-		console.log(req.body)
-		res.send('User created')
+		try {
+			let user = await User.findOne({ email })
+
+			if (user) {
+				return res.status(400).json({ errors: [{ msg: 'User already exists' }] })
+			}
+
+			/* Generate user avatar */
+			const avatar = gravatar.url(email, { s: '200', r: 'x', d: 'mm' })
+
+			user = new User({ name, email, avatar, password })
+
+			/* Encrypt password in db */
+			var salt = await bcrypt.genSaltSync(10)
+			user.password = await bcrypt.hashSync(password, salt)
+
+			await user.save((err, user) => {
+				res.send('User registered!')
+			})
+		} catch (err) {
+			console.log(err.message)
+			res.status(500).send('Server error')
+		}
 	}
 )
 
