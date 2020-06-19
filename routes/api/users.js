@@ -3,6 +3,10 @@ const router = express.Router()
 const gravatar = require('gravatar')
 const bcrypt = require('bcryptjs')
 
+/* For JWT authorization */
+const jwt = require('jsonwebtoken')
+const config = require('config')
+
 /* Using express validator to check posted user registration info */
 const { check, validationResult } = require('express-validator')
 
@@ -35,7 +39,7 @@ router.post(
 			let user = await User.findOne({ email })
 
 			if (user) {
-				return res.status(400).json({ errors: [{ msg: 'User already exists' }] })
+				return res.status(400).json({ errors: [{ msg: 'User already exists.' }] })
 			}
 
 			/* Generate user avatar */
@@ -47,8 +51,22 @@ router.post(
 			var salt = await bcrypt.genSaltSync(10)
 			user.password = await bcrypt.hashSync(password, salt)
 
-			await user.save((err, user) => {
-				res.send('User registered!')
+			/* Save user info in db */
+			await user.save()
+
+			/* Payload field for JTW */
+			const payload = {
+				user: {
+					id: user.id,
+				},
+			}
+
+			/* Create JWT */
+			jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 36000 }, (err, token) => {
+				if (err) {
+					throw err
+				}
+				res.json({ msg: 'User registered!', token })
 			})
 		} catch (err) {
 			console.log(err.message)
