@@ -13,23 +13,23 @@ const { check, validationResult } = require('express-validator')
 const User = require('../../models/User')
 
 /*
- *   @route      GET /api/users
+ *   @route      POST /api/users
  *   @desc       Register user
  *   @access     Public
  */
 router.post(
 	'/',
 	[
-		check('name', 'Name is required').not().isEmpty(),
-		check('email', 'Please include a valid email').isEmail(),
-		check('password', 'Please enter password with at least 6 characters').isLength({ min: 6 }),
+		check('name', 'Name is required.').not().isEmpty(),
+		check('email', 'Please include a valid email.').isEmail(),
+		check('password', 'Please enter password with at least 6 characters.').isLength({ min: 6 }),
 	],
 	async (req, res) => {
 		const errors = validationResult(req)
 
 		/* If errors in validation, throw response */
 		if (!errors.isEmpty()) {
-			return res.status(422).json({ errors: errors.array() })
+			return res.status(400).json({ errors: errors.array() })
 		}
 
 		/* Registering user ... */

@@ -1,3 +1,5 @@
+/* Model for user documents */
+
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
@@ -23,4 +25,4 @@ const userSchema = new mongoose.Schema({
 	},
 })
 
-module.exports = User = mongoose.model('user', userSchema)
+module.exports = User = mongoose.model('User', userSchema)

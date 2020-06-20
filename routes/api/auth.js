@@ -11,7 +11,7 @@ const auth = require('../../middleware/auth')
 const { check, validationResult } = require('express-validator')
 
 /*
- *   @route     GET /api/auth
+ *   @route      GET /api/auth
  *   @desc       Test route
  *   @access     Public
  */
@@ -24,6 +24,11 @@ router.get('/', auth, async (req, res) => {
 	}
 })
 
+/*
+ *   @route      POST /api/auth
+ *   @desc       User log in
+ *   @access     Public
+ */
 router.post(
 	'/',
 	[
