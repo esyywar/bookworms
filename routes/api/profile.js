@@ -63,7 +63,7 @@ router.get('/user/:user_id', async (req, res) => {
 		])
 
 		if (!profile) {
-			return res.status(400).send('User profile not found.')
+			return res.status(400).json({ msg: 'User profile not found.' })
 		}
 
 		res.json(profile)
@@ -199,7 +199,7 @@ router.put(
 		const { title, author, year, rating, description } = req.body
 
 		if (!(rating >= 0 && rating <= 10)) {
-			return res.status(401).send('Rating invalid (must be 1 -10).')
+			return res.status(401).json({ msg: 'Rating invalid (must be 1 -10).' })
 		}
 
 		const newBook = { title, author, year, rating, description }
@@ -209,7 +209,7 @@ router.put(
 			const profile = await Profile.findOne({ user: req.user.id })
 
 			if (profile.library.some((element) => element.title == newBook.title)) {
-				return res.status(401).send('This book is already in your library!')
+				return res.status(401).json({ msg: 'This book is already in your library!' })
 			}
 
 			profile.library.unshift(newBook)
@@ -243,6 +243,27 @@ router.delete('/', auth, async (req, res) => {
 		res.json({ msg: `Account has been deleted.` })
 	} catch (error) {
 		res.status(500).send('Server error.')
+	}
+})
+
+/*
+ *   @route      DELETE /api/profile/me
+ *   @desc       Remove book from user's library
+ *   @access     Private
+ */
+router.delete('/library/:lib_id', auth, async (req, res) => {
+	try {
+		const profile = await Profile.findOne({ user: req.user.id })
+
+		const removeIndex = profile.library.map((book) => book._id).indexOf(req.params.lib_id)
+
+		profile.library.splice(removeIndex, 1)
+
+		await profile.save()
+
+		res.json({ msg: 'Book removed from library.' })
+	} catch (error) {
+		res.status(400).send('Server error.')
 	}
 })
 
