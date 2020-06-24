@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setAlert } from '../../actions/alert'
+import { registerUser } from '../../actions/auth'
 
 import Container from 'react-bootstrap/Container'
 
@@ -10,12 +11,15 @@ import Button from 'react-bootstrap/Button'
 
 export default function Register() {
 	/********************* LOCAL STATE VARIABLES ********************/
-	const initialState = { name: '', emailAddr: '', password: '', password2: '' }
+	const initialState = { name: '', email: '', password: '', password2: '' }
 	const [formEntries, setFormEntries] = useState(initialState)
 
 	/********************* REDUX STORE MANAGEMENT *********************/
 
 	const dispatch = useDispatch()
+
+	const authUser = useSelector((state) => state.authUser)
+	console.log(authUser)
 
 	/******************** FORM UPDATE & SUBMIT FUNCTIONS ******************/
 
@@ -28,7 +32,8 @@ export default function Register() {
 		if (formEntries.password !== formEntries.password2) {
 			dispatch(setAlert('Passwords do not match!', 'danger'))
 		}
-		console.log(formEntries)
+
+		dispatch(registerUser(formEntries))
 	}
 
 	return (
@@ -42,17 +47,19 @@ export default function Register() {
 						placeholder="Enter your name"
 						value={formEntries.name}
 						onChange={handleInputChange}
+						required
 					/>
 				</Form.Group>
 
 				<Form.Group controlId="formBasicEmail">
 					<Form.Label>Email address</Form.Label>
 					<Form.Control
-						name="emailAddr"
+						name="email"
 						type="email"
 						placeholder="Enter email"
-						value={formEntries.emailAddr}
+						value={formEntries.email}
 						onChange={handleInputChange}
+						required
 					/>
 					<Form.Text className="text-muted">
 						We'll never share your email with anyone else.
@@ -67,6 +74,7 @@ export default function Register() {
 						placeholder="Password"
 						value={formEntries.password}
 						onChange={handleInputChange}
+						required
 					/>
 				</Form.Group>
 				<Form.Group controlId="formBasicPasswordRepeat">
@@ -77,6 +85,7 @@ export default function Register() {
 						placeholder="Comfirm password"
 						value={formEntries.password2}
 						onChange={handleInputChange}
+						required
 					/>
 				</Form.Group>
 				<Button variant="primary" type="submit">

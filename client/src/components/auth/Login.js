@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 
+import { useDispatch } from 'react-redux'
+import { loginUser } from '../../actions/auth'
+
 import Container from 'react-bootstrap/Container'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 function Login() {
-	const initialState = { emailAddr: '', password: '' }
+	const initialState = { email: '', password: '' }
 	const [formEntries, setFormEntries] = useState(initialState)
-
-	const axios = require('axios')
+	const dispatch = useDispatch()
 
 	function handleInputChange(e) {
 		setFormEntries({ ...formEntries, [e.target.name]: e.target.value })
@@ -18,22 +20,7 @@ function Login() {
 	async function handleSubmit(e) {
 		e.preventDefault()
 
-		const loginCreds = { email: formEntries.emailAddr, password: formEntries.password }
-
-		const config = {
-			headers: {
-				'Content-type': 'application/json',
-			},
-		}
-
-		const body = JSON.stringify(loginCreds)
-
-		try {
-			const res = await axios.post('/api/auth', body, config)
-			console.log(res.data)
-		} catch (error) {
-			console.log(error.message)
-		}
+		dispatch(loginUser(formEntries))
 	}
 
 	return (
@@ -42,10 +29,10 @@ function Login() {
 				<Form.Group controlId="formBasicEmail">
 					<Form.Label>Email address</Form.Label>
 					<Form.Control
-						name="emailAddr"
+						name="email"
 						type="email"
 						placeholder="Enter email"
-						value={formEntries.emailAddr}
+						value={formEntries.email}
 						onChange={handleInputChange}
 					/>
 					<Form.Text className="text-muted">

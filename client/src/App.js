@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { loadUser } from './actions/auth'
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
@@ -15,6 +16,12 @@ import UserAlert from './components/UserAlert'
 
 function App() {
 	const alerts = useSelector((state) => state.alerts)
+	const dispatch = useDispatch()
+
+	/* Check for token in client's cache/cookies */
+	useEffect(() => {
+		dispatch(loadUser())
+	}, [dispatch])
 
 	return (
 		<Fragment>
