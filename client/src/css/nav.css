@@ -1,0 +1,9 @@
+.nav-link-item {
+  color: white;
+  text-decoration: none !important;
+}
+
+.nav-link-item:hover {
+  color: gray;
+}
+/*# sourceMappingURL=nav.css.map */
