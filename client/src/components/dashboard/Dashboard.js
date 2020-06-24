@@ -2,10 +2,10 @@ import React from 'react'
 
 import Container from 'react-bootstrap/Container'
 
-export default function Landing() {
+export default function Dashboard() {
 	return (
 		<Container fluid className="text-center">
-			<h3>Welcome to Bookworms!</h3>
+			<h3>User Dashboard</h3>
 		</Container>
 	)
 }

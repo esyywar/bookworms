@@ -5,6 +5,8 @@ import { loadUser } from './actions/auth'
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
+import PrivateRoute from './components/routing/PrivateRoute'
+
 import Container from 'react-bootstrap/Container'
 
 import Nav from './components/NavMenu'
@@ -13,6 +15,8 @@ import Landing from './components/Landing'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 import UserAlert from './components/UserAlert'
+
+import Dashboard from './components/dashboard/Dashboard'
 
 function App() {
 	const alerts = useSelector((state) => state.alerts)
@@ -39,6 +43,9 @@ function App() {
 						<Route path="/register">
 							<Register />
 						</Route>
+						<PrivateRoute path="/dashboard">
+							<Dashboard />
+						</PrivateRoute>
 					</Switch>
 				</Container>
 			</Router>

@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { Redirect } from 'react-router-dom'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { setAlert } from '../../actions/alert'
 import { registerUser } from '../../actions/auth'
@@ -18,8 +20,14 @@ export default function Register() {
 
 	const dispatch = useDispatch()
 
-	const authUser = useSelector((state) => state.authUser)
-	console.log(authUser)
+	/* Redirect the user if authenticated */
+	/* User authentication state */
+	const isAuthenticated = useSelector((state) => state.authUser.isAuthenticated)
+
+	/* Redirect to dashboard if user authenticated */
+	if (isAuthenticated) {
+		return <Redirect to="/dashboard" />
+	}
 
 	/******************** FORM UPDATE & SUBMIT FUNCTIONS ******************/
 

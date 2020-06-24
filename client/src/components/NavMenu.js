@@ -1,41 +1,62 @@
 import React from 'react'
 
+import { useSelector, useDispatch } from 'react-redux'
+import { logoutUser } from '../actions/auth'
+
 import { Link } from 'react-router-dom'
 
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
-import Button from 'react-bootstrap/Button'
 
 import '../css/nav.css'
 
 export default function NavMenu() {
+	const authUser = useSelector((state) => state.authUser)
+	const dispatch = useDispatch()
+
+	/* Nav items when logged in */
+	const guestNav = (
+		<Nav className="ml-auto">
+			<Nav.Link>
+				<Link className="nav-link-item" to="/">
+					Home
+				</Link>
+			</Nav.Link>
+			<Nav.Link>
+				<Link className="nav-link-item" to="/login">
+					Log In
+				</Link>
+			</Nav.Link>
+		</Nav>
+	)
+
+	const userNav = (
+		<Nav className="ml-auto">
+			<Nav.Link>
+				<Link className="nav-link-item" to="/dashboard">
+					Dashboard
+				</Link>
+			</Nav.Link>
+			<Nav.Link>
+				<Link className="nav-link-item" onClick={() => dispatch(logoutUser())}>
+					Log Out
+				</Link>
+			</Nav.Link>
+		</Nav>
+	)
+
+	/* Called to set navigation bar */
+	function setNav(authUser) {
+		if (!authUser.loading) {
+			return authUser.isAuthenticated ? userNav : guestNav
+		}
+	}
+
 	return (
 		<nav>
 			<Navbar bg="dark" variant="dark">
-				<Navbar.Brand href="#home">Navbar</Navbar.Brand>
-				<Nav className="mr-auto">
-					<Nav.Link>
-						<Link className="nav-link-item" to="/">
-							Home
-						</Link>
-					</Nav.Link>
-					<Nav.Link>
-						<Link className="nav-link-item" to="/login">
-							Log In
-						</Link>
-					</Nav.Link>
-					<Nav.Link>
-						<Link className="nav-link-item" to="/register">
-							Sign Up
-						</Link>
-					</Nav.Link>
-				</Nav>
-				<Form inline>
-					<FormControl type="text" placeholder="Search" className="mr-sm-2" />
-					<Button variant="outline-info">Search</Button>
-				</Form>
+				<Navbar.Brand href="/">Navbar</Navbar.Brand>
+				{setNav(authUser)}
 			</Navbar>
 			<br />
 		</nav>

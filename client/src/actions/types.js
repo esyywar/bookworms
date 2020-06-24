@@ -13,3 +13,6 @@ export const LOGIN_FAILED = 'LOGIN_FAILED'
 /* User authentication on load */
 export const USER_LOADED = 'USER_LOADED'
 export const AUTH_ERROR = 'AUTH_ERROR'
+
+/* Log out user */
+export const LOGOUT_USER = 'LOGOUT_USER'

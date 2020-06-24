@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 
-import { useDispatch } from 'react-redux'
+import { Link, Redirect } from 'react-router-dom'
+
+import { useDispatch, useSelector } from 'react-redux'
 import { loginUser } from '../../actions/auth'
 
 import Container from 'react-bootstrap/Container'
-
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
@@ -12,6 +13,14 @@ function Login() {
 	const initialState = { email: '', password: '' }
 	const [formEntries, setFormEntries] = useState(initialState)
 	const dispatch = useDispatch()
+
+	/* User authentication state */
+	const isAuthenticated = useSelector((state) => state.authUser.isAuthenticated)
+
+	/* Redirect to dashboard if user authenticated */
+	if (isAuthenticated) {
+		return <Redirect to="/dashboard" />
+	}
 
 	function handleInputChange(e) {
 		setFormEntries({ ...formEntries, [e.target.name]: e.target.value })
@@ -54,6 +63,9 @@ function Login() {
 					Log In
 				</Button>
 			</Form>
+			<Link to="/register">
+				<Button variant="secondary mt-3">Sign Up</Button>
+			</Link>
 		</Container>
 	)
 }

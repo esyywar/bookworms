@@ -9,6 +9,7 @@ import {
 	LOGIN_FAILED,
 	REGISTER_SUCCESS,
 	REGISTER_FAILED,
+	LOGOUT_USER,
 } from './types'
 
 import { setAuthToken } from '../util/setAuthToken'
@@ -52,8 +53,6 @@ export const loginUser = ({ email, password }) => async (dispatch) => {
 			type: LOGIN_SUCCESS,
 			payload: res.data,
 		})
-
-		dispatch(setAlert(res.data.msg, 'success'))
 	} catch (error) {
 		dispatch({
 			type: LOGIN_FAILED,
@@ -63,6 +62,13 @@ export const loginUser = ({ email, password }) => async (dispatch) => {
 		errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')))
 
 		console.log(error.message)
+	}
+}
+
+/* Log out user */
+export const logoutUser = () => {
+	return {
+		type: LOGOUT_USER,
 	}
 }
 
