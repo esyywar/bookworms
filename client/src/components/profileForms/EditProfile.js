@@ -44,19 +44,17 @@ function EditProfile() {
 
 	function handleInputChange(e) {
 		setFormEntries({ ...formEntries, [e.target.name]: e.target.value })
-		console.log(formEntries)
 	}
 
 	function handleSubmit(e) {
 		e.preventDefault()
-
 		dispatch(createProfile(formEntries, history, true))
 	}
 
 	return (
 		<Container className="mb-3">
 			<Form onSubmit={handleSubmit}>
-				<Form.Group controlId="name">
+				<Form.Group controlId="PlainText">
 					<Form.Label>Name</Form.Label>
 					<Form.Control
 						name="name"
@@ -66,11 +64,12 @@ function EditProfile() {
 						onChange={handleInputChange}
 					/>
 				</Form.Group>
-				<Form.Group controlId="name">
+				<Form.Group controlId="PlainText">
 					<Form.Label>Bio</Form.Label>
 					<Form.Control
 						name="bio"
-						type="textarea"
+						as="textarea"
+						rows="3"
 						placeholder="A little about yourself!"
 						value={formEntries.bio}
 						onChange={handleInputChange}

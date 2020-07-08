@@ -20,6 +20,8 @@ import Dashboard from './components/dashboard/Dashboard'
 import EditProfile from './components/profileForms/EditProfile'
 import CreateProfile from './components/profileForms/CreateProfile'
 
+import LibraryAdd from './components/profileForms/LibraryAdd'
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
@@ -59,6 +61,9 @@ function App() {
 						</PrivateRoute>
 						<PrivateRoute path="/edit-profile">
 							<EditProfile />
+						</PrivateRoute>
+						<PrivateRoute>
+							<LibraryAdd path="/library-add" />
 						</PrivateRoute>
 					</Switch>
 				</Container>

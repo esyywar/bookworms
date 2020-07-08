@@ -55,7 +55,7 @@ const profileSchema = new mongoose.Schema({
 			rating: {
 				type: Number,
 			},
-			description: {
+			comments: {
 				type: String,
 			},
 		},

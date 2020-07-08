@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button'
 function DashActions() {
 	return (
 		<Container>
-			<Link>
+			<Link to="/library-add">
 				<Button className="m-3">Edit Your Library</Button>
 			</Link>
 			<Link>

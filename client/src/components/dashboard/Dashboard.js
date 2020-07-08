@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/Button'
 
 import Spinner from '../SpinnerLoad'
 import DashActions from './DashActions'
+import LibraryDisp from './LibraryDisp'
 
 export default function Dashboard() {
 	const dispatch = useDispatch()
@@ -37,6 +38,11 @@ export default function Dashboard() {
 					<Link to="/edit-profile">
 						<Button>Edit Profile</Button>
 					</Link>
+
+					{/* Show user's library */}
+					<Fragment>
+						<LibraryDisp />
+					</Fragment>
 
 					{profile.profile == null && !profile.loading && (
 						<Container className="mt-5">

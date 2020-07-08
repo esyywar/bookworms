@@ -202,7 +202,7 @@ router.put(
 			const profile = await Profile.findOne({ user: req.user.id })
 
 			if (profile.library.some((element) => element.title == newBook.title)) {
-				return res.status(401).json({ msg: 'This book is already in your library!' })
+				return res.status(406).json({ errors: { msg: 'This book is already in your library!' } })
 			}
 
 			profile.library.unshift(newBook)

@@ -44,7 +44,8 @@ function CreateProfile() {
 					<Form.Label>Bio</Form.Label>
 					<Form.Control
 						name="bio"
-						type="textarea"
+						as="textarea"
+						rows="3"
 						placeholder="A little about yourself!"
 						value={formEntries.bio}
 						onChange={handleInputChange}
