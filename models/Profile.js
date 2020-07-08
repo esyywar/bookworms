@@ -27,10 +27,6 @@ const profileSchema = new mongoose.Schema({
 	location: {
 		type: String,
 	},
-	status: {
-		type: String,
-		required: true,
-	},
 	language: {
 		type: String,
 		required: true,
@@ -43,9 +39,6 @@ const profileSchema = new mongoose.Schema({
 		type: [String],
 	},
 	bio: {
-		type: String,
-	},
-	githubUsername: {
 		type: String,
 	},
 	library: [

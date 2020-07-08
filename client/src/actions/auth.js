@@ -10,19 +10,18 @@ import {
 	REGISTER_SUCCESS,
 	REGISTER_FAILED,
 	LOGOUT_USER,
+	CLEAR_PROFILE,
 } from './types'
 
 import { setAuthToken } from '../util/setAuthToken'
 
 /* Load user credentials from local storage and authenticate */
 export const loadUser = () => async (dispatch) => {
-	console.log(localStorage.token)
 	if (localStorage.token) {
 		setAuthToken(localStorage.token)
 	}
 
 	try {
-		console.log('load user request made')
 		const res = await axios.get('/api/auth')
 
 		dispatch({
@@ -53,6 +52,7 @@ export const loginUser = ({ email, password }) => async (dispatch) => {
 			type: LOGIN_SUCCESS,
 			payload: res.data,
 		})
+		dispatch(loadUser())
 	} catch (error) {
 		dispatch({
 			type: LOGIN_FAILED,
@@ -66,10 +66,9 @@ export const loginUser = ({ email, password }) => async (dispatch) => {
 }
 
 /* Log out user */
-export const logoutUser = () => {
-	return {
-		type: LOGOUT_USER,
-	}
+export const logoutUser = () => (dispatch) => {
+	dispatch({ type: LOGOUT_USER })
+	dispatch({ type: CLEAR_PROFILE })
 }
 
 /* Register user - call to API and dispatch */

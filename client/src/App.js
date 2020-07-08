@@ -17,6 +17,14 @@ import Login from './components/auth/Login'
 import UserAlert from './components/UserAlert'
 
 import Dashboard from './components/dashboard/Dashboard'
+import EditProfile from './components/profileForms/EditProfile'
+import CreateProfile from './components/profileForms/CreateProfile'
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+
+library.add(fab, faSignOutAlt)
 
 function App() {
 	const alerts = useSelector((state) => state.alerts)
@@ -45,6 +53,12 @@ function App() {
 						</Route>
 						<PrivateRoute path="/dashboard">
 							<Dashboard />
+						</PrivateRoute>
+						<PrivateRoute path="/create-profile">
+							<CreateProfile />
+						</PrivateRoute>
+						<PrivateRoute path="/edit-profile">
+							<EditProfile />
 						</PrivateRoute>
 					</Switch>
 				</Container>

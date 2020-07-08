@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import '../css/nav.css'
 
 export default function NavMenu() {
@@ -39,7 +41,9 @@ export default function NavMenu() {
 			</Nav.Link>
 			<Nav.Link>
 				<Link className="nav-link-item" onClick={() => dispatch(logoutUser())}>
-					Log Out
+					<span>
+						<FontAwesomeIcon icon="sign-out-alt" /> Log Out
+					</span>
 				</Link>
 			</Nav.Link>
 		</Nav>

@@ -33,7 +33,6 @@ router.get('/me', auth, async (req, res) => {
 	} catch (err) {
 		res.status(500).send('Server error.')
 	}
-	res.send('Profile route')
 })
 
 /*
@@ -88,7 +87,6 @@ router.post(
 	[
 		auth,
 		check('name', 'Name is required.').not().isEmpty(),
-		check('status', 'Status is required.').not().isEmpty(),
 		check('language', 'Language is required.').not().isEmpty(),
 	],
 	async (req, res) => {
@@ -101,19 +99,16 @@ router.post(
 
 		/* Build profile object */
 		const {
-			user,
 			name,
 			avatar,
 			date,
 			company,
 			website,
 			location,
-			status,
 			language,
 			favAuthors,
 			favBooks,
 			bio,
-			githubUsername,
 			pastReads,
 			library,
 			youtube,
@@ -131,13 +126,11 @@ router.post(
 		if (company) profileFields.company = company
 		if (website) profileFields.website = website
 		if (location) profileFields.location = location
-		if (status) profileFields.status = status
 		if (language) profileFields.language = language
 		if (favAuthors)
 			profileFields.favAuthors = favAuthors.split(',').map((element) => element.trim())
 		if (favBooks) profileFields.favBooks = favBooks.split(',').map((element) => element.trim())
 		if (bio) profileFields.bio = bio
-		if (githubUsername) profileFields.githubUsername = githubUsername
 		if (pastReads) profileFields.pastReads = pastReads
 		if (library) profileFields.library = library
 
