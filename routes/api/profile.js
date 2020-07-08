@@ -240,7 +240,7 @@ router.delete('/', auth, async (req, res) => {
 })
 
 /*
- *   @route      DELETE /api/profile/me
+ *   @route      DELETE /api/profile/library/:lib_id
  *   @desc       Remove book from user's library
  *   @access     Private
  */
@@ -254,7 +254,7 @@ router.delete('/library/:lib_id', auth, async (req, res) => {
 
 		await profile.save()
 
-		res.json({ msg: 'Book removed from library.' })
+		res.json(profile.library)
 	} catch (error) {
 		res.status(400).send('Server error.')
 	}

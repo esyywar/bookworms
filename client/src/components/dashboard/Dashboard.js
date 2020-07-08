@@ -35,9 +35,11 @@ export default function Dashboard() {
 						<DashActions />
 					</Fragment>
 
-					<Link to="/edit-profile">
-						<Button>Edit Profile</Button>
-					</Link>
+					<Container>
+						<Link to="/edit-profile">
+							<Button>Edit Profile</Button>
+						</Link>
+					</Container>
 
 					{/* Show user's library */}
 					<Fragment>

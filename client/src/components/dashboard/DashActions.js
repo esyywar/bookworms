@@ -7,15 +7,15 @@ import Button from 'react-bootstrap/Button'
 
 function DashActions() {
 	return (
-		<Container>
+		<Container className="mt-3 mb-3">
 			<Link to="/library-add">
-				<Button className="m-3">Edit Your Library</Button>
+				<Button className="mr-3">Edit Your Library</Button>
 			</Link>
 			<Link>
-				<Button className="m-3">Add Fav Authors</Button>
+				<Button className="mr-3">Add Fav Authors</Button>
 			</Link>
 			<Link>
-				<Button className="m-3">Add Fav Books</Button>
+				<Button className="mr-3">Add Fav Books</Button>
 			</Link>
 		</Container>
 	)

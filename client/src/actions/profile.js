@@ -2,7 +2,14 @@ import axios from 'axios'
 
 import { setAlert } from './alert'
 
-import { GET_PROFILE, CREATE_PROFILE, PROFILE_ERROR, UPDATE_LIBRARY } from '../actions/types'
+import {
+	GET_PROFILE,
+	CREATE_PROFILE,
+	PROFILE_ERROR,
+	UPDATE_LIBRARY,
+	ACCOUNT_DELETED,
+	CLEAR_PROFILE,
+} from '../actions/types'
 
 /* Get current user's profile */
 export const getUserProfile = () => async (dispatch) => {
@@ -91,6 +98,64 @@ export const addToLibrary = (libraryAdd) => async (dispatch) => {
 				errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')))
 			} else {
 				dispatch(setAlert(errors.msg, 'danger'))
+			}
+		}
+	}
+}
+
+/* Remove book from library */
+export const deleteFromLibrary = (id) => async (dispatch) => {
+	try {
+		const res = await axios.delete(`/api/profile/library/${id}`)
+
+		dispatch({
+			type: UPDATE_LIBRARY,
+			payload: res.data,
+		})
+
+		dispatch(setAlert('Book removed from library!', 'success'))
+	} catch (error) {
+		dispatch({
+			type: PROFILE_ERROR,
+			payload: { msg: error.response.statusText, status: error.response.status },
+		})
+
+		const errors = error.response.data.errors
+
+		if (errors) {
+			if (Array.isArray(errors)) {
+				errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')))
+			} else {
+				dispatch(setAlert(errors.msg, 'danger'))
+			}
+		}
+	}
+}
+
+/* Delete user's account and profile */
+export const deleteAccount = () => async (dispatch) => {
+	if (window.confirm('Are you sure you want to delete? (This action can not be undone!)')) {
+		try {
+			await axios.delete('/api/profile')
+
+			dispatch({ type: CLEAR_PROFILE })
+			dispatch({ type: ACCOUNT_DELETED })
+
+			dispatch(setAlert('Account has been deleted!', 'info'))
+		} catch (error) {
+			dispatch({
+				type: PROFILE_ERROR,
+				payload: { msg: error.response.statusText, status: error.response.status },
+			})
+
+			const errors = error.response.data.errors
+
+			if (errors) {
+				if (Array.isArray(errors)) {
+					errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')))
+				} else {
+					dispatch(setAlert(errors.msg, 'danger'))
+				}
 			}
 		}
 	}

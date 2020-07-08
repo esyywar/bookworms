@@ -29,3 +29,7 @@ export const CLEAR_PROFILE = 'CLEAR_PROFILE'
 export const PROFILE_ERROR = 'PROFILE_ERROR'
 
 export const UPDATE_LIBRARY = 'UPDATE_LIBRARY'
+
+/******************* DELETE ACCOUNT *****************/
+
+export const ACCOUNT_DELETED = 'ACCOUNT DELETED'

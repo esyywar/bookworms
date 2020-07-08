@@ -6,6 +6,7 @@ import {
 	REGISTER_SUCCESS,
 	REGISTER_FAILED,
 	LOGOUT_USER,
+	ACCOUNT_DELETED,
 } from '../actions/types'
 
 const initialState = {
@@ -25,28 +26,12 @@ export const authUser = (state = initialState, action) => {
 				isAuthenticated: true,
 				loading: false,
 			}
-		case LOGIN_FAILED:
-			localStorage.removeItem('token')
-			return {
-				...state,
-				isAuthenticated: false,
-				loading: false,
-			}
 		case REGISTER_SUCCESS: {
 			localStorage.setItem('token', action.payload.token)
 			return {
 				...state,
 				...action.payload,
 				isAuthenticated: true,
-				loading: false,
-			}
-		}
-		case REGISTER_FAILED: {
-			localStorage.removeItem('token')
-			return {
-				...state,
-				token: null,
-				isAuthenticated: false,
 				loading: false,
 			}
 		}
@@ -58,15 +43,11 @@ export const authUser = (state = initialState, action) => {
 				isAuthenticated: true,
 				loading: false,
 			}
+		case REGISTER_FAILED:
 		case AUTH_ERROR:
-			localStorage.removeItem('token')
-			return {
-				...state,
-				token: null,
-				isAuthenticated: false,
-				loading: false,
-			}
 		case LOGOUT_USER:
+		case LOGIN_FAILED:
+		case ACCOUNT_DELETED:
 			localStorage.removeItem('token')
 			return {
 				...state,
