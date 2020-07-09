@@ -17,14 +17,14 @@ function Profiles() {
 	}, [dispatch])
 
 	/* Read profiles of all users */
-	const profiles = useSelector((state) => state.profile)
+	const profile = useSelector((state) => state.profile)
 
 	return (
 		<Container>
-			{profiles.profile === null || profiles.loading ? (
+			{profile.profiles === [] || profile.loading ? (
 				<Spinner />
-			) : profiles.profile.length > 0 ? (
-				profiles.profile.map((profile, index) => {
+			) : profile.profiles.length > 0 ? (
+				profile.profiles.map((profile, index) => {
 					return <ProfileCard key={index} profile={profile} />
 				})
 			) : (

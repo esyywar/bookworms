@@ -137,7 +137,7 @@ router.post(
 
 /*
  *   @route      PUT /api/posts/like/:id
- *   @desc       Like a post
+ *   @desc       Toggle like of a post
  *   @access     Private
  */
 router.put('/like/:id', auth, async (req, res) => {
@@ -150,14 +150,19 @@ router.put('/like/:id', auth, async (req, res) => {
 
 		/* Check if user has already liked the post */
 		if (post.likes.filter((likes) => likes.user.toString() === req.user.id).length > 0) {
-			return res.status(400).json({ msg: 'Post already liked.' })
-		}
+			const removeIndex = post.likes.map((likes) => likes.user.toString()).indexOf(req.user.id)
+			post.likes.splice(removeIndex, 1)
 
-		post.likes.unshift({ user: req.user.id })
+			var msg = 'Unliked post!'
+		} else {
+			post.likes.unshift({ user: req.user.id })
+
+			var msg = 'Liked post!'
+		}
 
 		await post.save()
 
-		res.json(post.likes)
+		res.json({ post, msg })
 	} catch (error) {
 		res.status(500).send('Server error.')
 	}

@@ -27,7 +27,7 @@ export const profile = (state = initialState, action) => {
 		case GET_ALL_PROFILES:
 			return {
 				...state,
-				profile: action.payload,
+				profiles: action.payload,
 				loading: false,
 				error: {},
 			}
@@ -42,6 +42,7 @@ export const profile = (state = initialState, action) => {
 			return {
 				...state,
 				profile: null,
+				profiles: [],
 				library: [],
 				loading: false,
 				error: action.payload.error,

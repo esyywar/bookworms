@@ -11,8 +11,11 @@ import Container from 'react-bootstrap/Container'
 
 import Nav from './components/NavMenu'
 import Landing from './components/Landing'
+
 import Profiles from './components/profile/Profiles'
 import UserProfile from './components/profile/UserProfile'
+
+import Posts from './components/post/Posts'
 
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
@@ -26,9 +29,9 @@ import LibraryAdd from './components/profileForms/LibraryAdd'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faSignOutAlt, faHeart, faComment, faThumbsDown } from '@fortawesome/free-solid-svg-icons'
 
-library.add(fab, faSignOutAlt)
+library.add(fab, faSignOutAlt, faHeart, faComment, faThumbsDown)
 
 function App() {
 	const alerts = useSelector((state) => state.alerts)
@@ -60,6 +63,9 @@ function App() {
 						</Route>
 						<Route path="/user-profile/:id">
 							<UserProfile />
+						</Route>
+						<Route path="/posts">
+							<Posts />
 						</Route>
 						<PrivateRoute path="/dashboard">
 							<Dashboard />

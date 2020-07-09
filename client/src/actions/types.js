@@ -31,6 +31,14 @@ export const PROFILE_ERROR = 'PROFILE_ERROR'
 
 export const UPDATE_LIBRARY = 'UPDATE_LIBRARY'
 
+/******************* POSTS *****************/
+
+export const GET_POST = 'GET_POST'
+export const GET_POSTS = 'GET_POSTS'
+export const CLEAR_POST = 'CLEAR-POST'
+export const UPDATE_LIKES = 'UPDATE_LIKES'
+export const POST_ERROR = 'POST_ERROR'
+
 /******************* DELETE ACCOUNT *****************/
 
 export const ACCOUNT_DELETED = 'ACCOUNT DELETED'
