@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, Fragment } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -8,6 +8,8 @@ import { getProfileById } from '../../actions/profile'
 
 import Container from 'react-bootstrap/Container'
 
+import ProfileTop from './ProfileTop'
+import ProfileBottom from './ProfileBottom'
 import Spinner from '../SpinnerLoad'
 
 export default function UserProfile(props) {
@@ -22,8 +24,15 @@ export default function UserProfile(props) {
 	const profile = useSelector((state) => state.profile)
 
 	return (
-		<Container>
-			{profile.profile == null && profile.loading ? <Spinner /> : profile.profile.name}
+		<Container className="text-center">
+			{profile.profile == null || profile.loading ? (
+				<Spinner />
+			) : (
+				<Fragment>
+					<ProfileTop profile={profile.profile} />
+					<ProfileBottom profile={profile.profile} />
+				</Fragment>
+			)}
 		</Container>
 	)
 }

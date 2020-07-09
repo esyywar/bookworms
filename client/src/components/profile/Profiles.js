@@ -25,7 +25,7 @@ function Profiles() {
 				<Spinner />
 			) : profiles.profile.length > 0 ? (
 				profiles.profile.map((profile, index) => {
-					return <ProfileCard profile={profile} />
+					return <ProfileCard key={index} profile={profile} />
 				})
 			) : (
 				<h4>No profiles found :(</h4>
