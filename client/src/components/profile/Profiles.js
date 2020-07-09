@@ -21,7 +21,7 @@ function Profiles() {
 
 	return (
 		<Container>
-			{profiles.profile == null && profiles.loading ? (
+			{profiles.profile === null || profiles.loading ? (
 				<Spinner />
 			) : profiles.profile.length > 0 ? (
 				profiles.profile.map((profile, index) => {

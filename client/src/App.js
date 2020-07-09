@@ -12,6 +12,7 @@ import Container from 'react-bootstrap/Container'
 import Nav from './components/NavMenu'
 import Landing from './components/Landing'
 import Profiles from './components/profile/Profiles'
+import UserProfile from './components/profile/UserProfile'
 
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
@@ -56,6 +57,9 @@ function App() {
 						</Route>
 						<Route path="/profiles">
 							<Profiles />
+						</Route>
+						<Route path="/user-profile/:id">
+							<UserProfile />
 						</Route>
 						<PrivateRoute path="/dashboard">
 							<Dashboard />
