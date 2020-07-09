@@ -12,7 +12,7 @@ import Spinner from '../SpinnerLoad'
 import DashActions from './DashActions'
 import LibraryDisp from './LibraryDisp'
 
-export default function Dashboard() {
+function Dashboard() {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
@@ -59,3 +59,5 @@ export default function Dashboard() {
 		</Container>
 	)
 }
+
+export default Dashboard

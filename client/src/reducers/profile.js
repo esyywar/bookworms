@@ -1,4 +1,10 @@
-import { GET_PROFILE, CLEAR_PROFILE, UPDATE_LIBRARY, PROFILE_ERROR } from '../actions/types'
+import {
+	GET_PROFILE,
+	GET_ALL_PROFILES,
+	CLEAR_PROFILE,
+	UPDATE_LIBRARY,
+	PROFILE_ERROR,
+} from '../actions/types'
 
 const initialState = {
 	profile: null,
@@ -15,6 +21,13 @@ export const profile = (state = initialState, action) => {
 				...state,
 				profile: action.payload,
 				library: action.payload.library,
+				loading: false,
+				error: {},
+			}
+		case GET_ALL_PROFILES:
+			return {
+				...state,
+				profile: action.payload,
 				loading: false,
 				error: {},
 			}

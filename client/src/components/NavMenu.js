@@ -25,6 +25,11 @@ export default function NavMenu() {
 				</Link>
 			</Nav.Link>
 			<Nav.Link>
+				<Link className="nav-link-item" to="/profiles">
+					Profiles
+				</Link>
+			</Nav.Link>
+			<Nav.Link>
 				<Link className="nav-link-item" to="/login">
 					Log In
 				</Link>
@@ -37,6 +42,11 @@ export default function NavMenu() {
 			<Nav.Link>
 				<Link className="nav-link-item" to="/dashboard">
 					Dashboard
+				</Link>
+			</Nav.Link>
+			<Nav.Link>
+				<Link className="nav-link-item" to="/profiles">
+					Profiles
 				</Link>
 			</Nav.Link>
 			<Nav.Link>

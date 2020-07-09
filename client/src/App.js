@@ -11,6 +11,7 @@ import Container from 'react-bootstrap/Container'
 
 import Nav from './components/NavMenu'
 import Landing from './components/Landing'
+import Profiles from './components/profile/Profiles'
 
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
@@ -52,6 +53,9 @@ function App() {
 						</Route>
 						<Route path="/register">
 							<Register />
+						</Route>
+						<Route path="/profiles">
+							<Profiles />
 						</Route>
 						<PrivateRoute path="/dashboard">
 							<Dashboard />
