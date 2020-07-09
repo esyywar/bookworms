@@ -43,7 +43,7 @@ function Dashboard() {
 
 					{/* Show user's library */}
 					<Fragment>
-						<LibraryDisp />
+						<LibraryDisp showDel={true} />
 					</Fragment>
 
 					{profile.profile == null && !profile.loading && (

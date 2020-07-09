@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 
-function LibraryDisp() {
+function LibraryDisp({ showDel = false }) {
 	const dispatch = useDispatch()
 
 	const library = useSelector((state) => state.profile.library)
@@ -22,7 +22,7 @@ function LibraryDisp() {
 						<th>Author</th>
 						<th>Year</th>
 						<th>Rating (1 - 10)</th>
-						<th></th>
+						{showDel && <th></th>}
 					</tr>
 				</thead>
 				<tbody>
@@ -33,11 +33,13 @@ function LibraryDisp() {
 								<td>{book.author}</td>
 								<td>{book.year}</td>
 								<td>{book.rating}</td>
-								<td>
-									<Button variant="danger" onClick={() => dispatch(deleteFromLibrary(book._id))}>
-										Delete
-									</Button>
-								</td>
+								{showDel && (
+									<td>
+										<Button variant="danger" onClick={() => dispatch(deleteFromLibrary(book._id))}>
+											Delete
+										</Button>
+									</td>
+								)}
 							</tr>
 						)
 					})}

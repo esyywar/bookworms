@@ -10,9 +10,11 @@ import Container from 'react-bootstrap/Container'
 
 import ProfileTop from './ProfileTop'
 import ProfileBottom from './ProfileBottom'
+import ProfileSocial from './ProfileSocial'
+import LibraryDisp from '../dashboard/LibraryDisp'
 import Spinner from '../SpinnerLoad'
 
-export default function UserProfile(props) {
+export default function UserProfile() {
 	const dispatch = useDispatch()
 
 	const params = useParams()
@@ -31,6 +33,8 @@ export default function UserProfile(props) {
 				<Fragment>
 					<ProfileTop profile={profile.profile} />
 					<ProfileBottom profile={profile.profile} />
+					<ProfileSocial social={profile.profile.social} />
+					<LibraryDisp />
 				</Fragment>
 			)}
 		</Container>
