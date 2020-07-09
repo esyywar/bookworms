@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Link } from 'react-router-dom'
 
 import { useDispatch } from 'react-redux'
 
-import { toggleLikePost } from '../../actions/post'
+import { toggleLikePost, deletePostById } from '../../actions/post'
 
 import Moment from 'react-moment'
 
@@ -14,7 +14,7 @@ import Button from 'react-bootstrap/Button'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-function PostCard({ post: { name, text, date, likes, comments, _id } }) {
+function PostCard({ post: { name, text, date, likes, comments, _id, user }, currUser }) {
 	const dispatch = useDispatch()
 
 	return (
@@ -45,6 +45,12 @@ function PostCard({ post: { name, text, date, likes, comments, _id } }) {
 					<Link to={`/post/${_id}`}>
 						<Button>Discussion</Button>
 					</Link>
+
+					{currUser && user === currUser._id && (
+						<Button className="ml-2" variant="danger" onClick={() => dispatch(deletePostById(_id))}>
+							Delete
+						</Button>
+					)}
 				</Card.Body>
 			</Card>
 		</Container>

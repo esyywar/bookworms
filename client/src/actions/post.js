@@ -2,7 +2,14 @@ import axios from 'axios'
 
 import { setAlert } from './alert'
 
-import { GET_POST, GET_POSTS, CLEAR_POST, UPDATE_LIKES, POST_ERROR } from '../actions/types'
+import {
+	GET_POST,
+	GET_POSTS,
+	CLEAR_POST,
+	UPDATE_LIKES,
+	DELETE_POST,
+	POST_ERROR,
+} from '../actions/types'
 
 /* Get all posts */
 export const getAllPosts = () => async (dispatch) => {
@@ -14,10 +21,7 @@ export const getAllPosts = () => async (dispatch) => {
 			payload: res.data,
 		})
 	} catch (error) {
-		dispatch({
-			type: POST_ERROR,
-			payload: { msg: error.response.statusText, status: error.response.status },
-		})
+		console.log(error.response)
 	}
 }
 
@@ -60,5 +64,21 @@ export const toggleLikePost = (postId) => async (dispatch) => {
 			type: POST_ERROR,
 			payload: { msg: error.response.statusText, status: error.response.status },
 		})
+	}
+}
+
+/* Delete a user's post */
+export const deletePostById = (postId) => async (dispatch) => {
+	try {
+		await axios.delete(`/api/posts/${postId}`)
+
+		dispatch({
+			type: DELETE_POST,
+			payload: postId,
+		})
+
+		dispatch(setAlert('Post deleted!', 'success'))
+	} catch (error) {
+		console.log(error.response)
 	}
 }

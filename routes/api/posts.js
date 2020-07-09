@@ -219,7 +219,9 @@ router.delete('/:id', auth, async (req, res) => {
 
 		await post.remove()
 
-		res.send('Post has been deleted.')
+		const msg = 'Post has been deleted'
+
+		res.json(msg)
 	} catch (error) {
 		if (error.kind === 'ObjectId') {
 			return res.status(400).json({ msg: 'Post was not found.' })

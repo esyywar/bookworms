@@ -18,6 +18,8 @@ function Posts() {
 
 	const post = useSelector((state) => state.post)
 
+	const user = useSelector((state) => state.authUser.user)
+
 	return (
 		<Container>
 			{post.posts === [] && post.loading ? (
@@ -25,7 +27,7 @@ function Posts() {
 			) : post.posts.length > 0 ? (
 				<Fragment>
 					{post.posts.map((post) => (
-						<PostCard post={post} />
+						<PostCard post={post} currUser={user} />
 					))}
 				</Fragment>
 			) : (

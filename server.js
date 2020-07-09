@@ -1,5 +1,6 @@
 const express = require('express')
 const connectDB = require('./config/db')
+const bodyParser = require('body-parser')
 
 const app = express()
 
@@ -7,6 +8,7 @@ const app = express()
 connectDB()
 
 /* Init middleware */
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())
 
 /* Set port as production server or 5000 for development */
