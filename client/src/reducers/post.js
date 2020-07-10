@@ -66,7 +66,10 @@ export const post = (state = initialState, action) => {
 		case DELETE_COMMENT:
 			return {
 				...state,
-				post: state.posts.comments.filter((comment) => comment._id !== action.payload),
+				post: {
+					...state.post,
+					comments: state.post.comments.filter((comment) => comment._id !== action.payload),
+				},
 			}
 		case POST_ERROR:
 			return {

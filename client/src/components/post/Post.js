@@ -48,7 +48,7 @@ export default function Post() {
 					<Container fluid className="text-left">
 						{post.post.comments.length > 0 &&
 							post.post.comments.map((comment) => (
-								<CommentDisp comment={comment} postId={post._id} />
+								<CommentDisp key={comment._id} comment={comment} postId={post.post._id} />
 							))}
 					</Container>
 
