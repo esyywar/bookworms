@@ -1,0 +1,4 @@
+{
+	"mongoUri": "mongodb+srv://reswar:Tdot2014@bookworm.fsgsq.mongodb.net/BookWorm?retryWrites=true&w=majority",
+	"jwtSecret": "jaynagar189"
+}
