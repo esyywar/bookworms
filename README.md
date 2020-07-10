@@ -1,7 +1,7 @@
 # Bookworms
 Practicing MERN stack with basic social media for book lovers.
 
-#About
+# About
 
 This is a simple full-stack project for me to practice MERN stack. It is a social media site where book lovers can create a profile, share posts, keep a library of favourite books, comment/like others' posts.
 
