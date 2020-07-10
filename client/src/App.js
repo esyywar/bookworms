@@ -15,7 +15,9 @@ import Landing from './components/Landing'
 import Profiles from './components/profile/Profiles'
 import UserProfile from './components/profile/UserProfile'
 
+import CreatePost from './components/post/CreatePost'
 import Posts from './components/post/Posts'
+import Post from './components/post/Post'
 
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
@@ -67,6 +69,9 @@ function App() {
 						<Route path="/posts">
 							<Posts />
 						</Route>
+						<Route path="/post/:id">
+							<Post />
+						</Route>
 						<PrivateRoute path="/dashboard">
 							<Dashboard />
 						</PrivateRoute>
@@ -76,8 +81,11 @@ function App() {
 						<PrivateRoute path="/edit-profile">
 							<EditProfile />
 						</PrivateRoute>
-						<PrivateRoute>
-							<LibraryAdd path="/library-add" />
+						<PrivateRoute path="/library-add">
+							<LibraryAdd />
+						</PrivateRoute>
+						<PrivateRoute path="/create-post">
+							<CreatePost />
 						</PrivateRoute>
 					</Switch>
 				</Container>

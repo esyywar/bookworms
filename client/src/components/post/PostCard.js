@@ -14,14 +14,17 @@ import Button from 'react-bootstrap/Button'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-function PostCard({ post: { name, text, date, likes, comments, _id, user }, currUser }) {
+function PostCard({ post: { title, name, text, date, likes, comments, _id, user }, currUser }) {
 	const dispatch = useDispatch()
 
 	return (
 		<Container className="mt-3">
 			<Card style={{ width: '18rem' }}>
 				<Card.Body>
-					<Card.Title>{name}</Card.Title>
+					<Card.Title>{title}</Card.Title>
+					<Card.Title>
+						<p>Author: {name}</p>
+					</Card.Title>
 					<Card.Subtitle className="mb-2 text-muted">
 						<Moment format="YYYY/MM/DD">{date}</Moment>
 					</Card.Subtitle>

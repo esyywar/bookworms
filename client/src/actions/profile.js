@@ -91,7 +91,6 @@ export const createProfile = (formData, history, edit = false) => async (dispatc
 			history.push('/dashboard')
 		}
 	} catch (error) {
-		console.log(error.response)
 		dispatch({
 			type: PROFILE_ERROR,
 			payload: { msg: error.response.statusText, status: error.response.status },

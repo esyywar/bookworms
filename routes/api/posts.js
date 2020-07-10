@@ -60,7 +60,11 @@ router.get('/:id', async (req, res) => {
  */
 router.post(
 	'/',
-	[auth, check('text', 'Post content is required.').not().isEmpty()],
+	[
+		auth,
+		check('title', 'Title for post is required.').not().isEmpty(),
+		check('text', 'Post content is required.').not().isEmpty(),
+	],
 	async (req, res) => {
 		const errors = validationResult(req)
 
@@ -73,6 +77,7 @@ router.post(
 			const user = await User.findById(req.user.id).select('-password')
 
 			const newPost = {
+				title: req.body.title,
 				text: req.body.text,
 				name: user.name,
 				avatar: user.avatar,
@@ -83,7 +88,7 @@ router.post(
 
 			await post.save()
 
-			res.json({ msg: 'Post has been published!' })
+			res.json(post)
 		} catch (error) {
 			res.status(500).send('Server error.')
 		}
@@ -91,12 +96,12 @@ router.post(
 )
 
 /*
- *   @route      POST /api/posts/:id
+ *   @route      POST /api/posts/comment/:id
  *   @desc       Comment on a post
  *   @access     Private
  */
 router.post(
-	'/:id',
+	'/comment/:id',
 	[auth, check('text', 'Comment content is required.').not().isEmpty()],
 	async (req, res) => {
 		const errors = validationResult(req)
@@ -231,11 +236,11 @@ router.delete('/:id', auth, async (req, res) => {
 })
 
 /*
- *   @route      DELETE /api/posts/:id/:comment_id
+ *   @route      DELETE /api/posts/comment/:id/:comment_id
  *   @desc       Delete a comment from a post
  *   @access     Private
  */
-router.delete('/:post_id/:comment_id', auth, async (req, res) => {
+router.delete('/comment/:post_id/:comment_id', auth, async (req, res) => {
 	try {
 		const post = await Post.findById(req.params.post_id)
 
@@ -265,7 +270,7 @@ router.delete('/:post_id/:comment_id', auth, async (req, res) => {
 
 		await post.save()
 
-		res.json(post)
+		res.json(comment._id)
 	} catch (error) {
 		res.status(500).send('Server error.')
 	}

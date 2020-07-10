@@ -81,7 +81,7 @@ function LibraryAdd() {
 				<Button type="submit">Add To My Library</Button>
 			</Form>
 			<Link to="/dashboard">
-				<Button>Back to Dashboard</Button>
+				<Button className="mt-3">Back to Dashboard</Button>
 			</Link>
 		</Container>
 	)

@@ -22,7 +22,7 @@ function Posts() {
 
 	return (
 		<Container>
-			{post.posts === [] && post.loading ? (
+			{!post.posts && post.loading ? (
 				<Spinner />
 			) : post.posts.length > 0 ? (
 				<Fragment>

@@ -30,7 +30,7 @@ function CreateProfile() {
 	return (
 		<Container className="mb-3">
 			<Form onSubmit={handleSubmit}>
-				<Form.Group controlId="name">
+				<Form.Group controlId="PlainText">
 					<Form.Label>Name</Form.Label>
 					<Form.Control
 						name="name"
@@ -40,7 +40,7 @@ function CreateProfile() {
 						onChange={handleInputChange}
 					/>
 				</Form.Group>
-				<Form.Group controlId="name">
+				<Form.Group controlId="PlainText">
 					<Form.Label>Bio</Form.Label>
 					<Form.Control
 						name="bio"

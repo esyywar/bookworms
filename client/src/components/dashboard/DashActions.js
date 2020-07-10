@@ -11,11 +11,8 @@ function DashActions() {
 			<Link to="/library-add">
 				<Button className="mr-3">Edit Your Library</Button>
 			</Link>
-			<Link>
-				<Button className="mr-3">Add Fav Authors</Button>
-			</Link>
-			<Link>
-				<Button className="mr-3">Add Fav Books</Button>
+			<Link to="/create-post">
+				<Button className="mr-3">Publish a Post</Button>
 			</Link>
 		</Container>
 	)
